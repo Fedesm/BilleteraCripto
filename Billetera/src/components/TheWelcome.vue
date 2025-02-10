@@ -5,10 +5,10 @@ import cryptoApi from '@/services/apiCrypto';
 import apiClient from '@/services/apiClient';
 import { useUserStore } from '@/store/user'; 
 
-const cryptos = ref(['BTC', 'ETH', 'DOGE']);
+const cryptos = ref(['BTC', 'ETH', 'USDT']);
 const selectedCrypto = ref('');
 const selectedAction = ref('');
-const selectedFiat = ref('ARS');
+const selectedFiat = ref('');
 const cryptosPrices = ref([]);
 //const amount = ref(0);
 //const message = ref('');
@@ -21,8 +21,8 @@ const userStore = useUserStore();
 const fetchCryptoPrices = async () => {
   cryptosPrices.value = [];
   try {
-    for (const crypto of cryptos) {
-      const response = await cryptoApi.get(`/lemoncash/${crypto}/${selectedFiat.value}/1`)
+    for (const crypto of cryptos.value) {
+      const response = await cryptoApi.get(`/satoshitango/${crypto}/${selectedFiat.value}/1`)
      cryptosPrices.value.push({
       crypto,
       price: response.data.bid || 0,
@@ -74,7 +74,7 @@ const calculateHoldings = async () => {
 
 const fetchCryptoPrice = async (cryptoCode) => {
   try {
-    const response = await cryptoApi.get(`/lemoncash/${cryptoCode}/ars`);
+    const response = await cryptoApi.get(`/satoshitango/${cryptoCode}/ars`);
     return response.data;
   } catch (error) {
     console.error(`Error al obtener el precio para ${cryptoCode}:`, error);
@@ -122,7 +122,7 @@ onMounted(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="crypto in cryptos" :key="crypto.crypto">
+      <tr v-for="crypto in cryptosPrices" :key="crypto.crypto">
         <td>{{ crypto.crypto }}</td>
         <td>{{ crypto.price }}</td>
         <td>

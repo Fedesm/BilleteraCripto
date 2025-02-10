@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import LoginComponent from './components/LoginComponent.vue'
-import RegisterComponent from './components/RegisterComponent.vue';
+//import RegisterComponent from './components/RegisterComponent.vue';
 
 const LogOk = ref(false);
 const currentView = ref('login');
@@ -13,19 +13,19 @@ const handleLoginSuccess = () => {
   currentView.value = 'welcome';  
 }
 
-const goToRegister = () => {
-  currentView.value = 'register';
-}
+// const goToRegister = () => {
+//   currentView.value = 'register';
+// }
 
-const goToLogin = () => {
-  currentView.value = 'login';
-}
+// const goToLogin = () => {
+//   currentView.value = 'login';
+// }
 
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="./assets/Dogecoin.avif" width="125" height="125" />
 
     <div class="wrapper">
       <HelloWorld msg="CCTYO!" />
@@ -33,16 +33,15 @@ const goToLogin = () => {
   </header>
 
   <main>
-    <!-- <LoginComponent 
+   <!-- <LoginComponent 
       v-if="currentView === 'login' && !LogOk"
-      @login-success="handleLoginSuccess"
-      @go-to-register="goToRegister"
-    />
-    <RegisterComponent
+      @login-success="handleLoginSuccess" 
+    />-->
+    <!-- <RegisterComponent
       v-else-if="currentView === 'register'"
       @go-to-login="goToLogin" />
     <TheWelcome v-else-if="LogOk"/> -->
-    <TheWelcome />
+   <TheWelcome />
   </main>
 </template>
 

@@ -4,21 +4,26 @@
   import { useUserStore } from '@/store/user.js';
   
   const userId = ref('');
-  const password = ref('');
   const errorMessage = ref ('');
   const emit = defineEmits(['login-success', 'go-to-register']);
   const userStore = useUserStore();
   
   async function login() {
     try {
-      const users = await loginUser(userId.value, password.value);
+      if(!userId.value){
+        errorMessage.value = 'Ingresar nombre de usuario.';
+        return;
+      }
+
+      const users = await loginUser(userId.value);
   
-      if(users.length > 0) {
-        userStore.setUserId(userId.value);
+      if(user) {
+        userStore.setUserId(user.userId);
         emit('login-success');
       }
       else {
-        errorMessage.value = 'Usuario o contraseña inválidos.';
+        errorMessage.value = 'Usuario no encontrado.';
+
       }
     } catch (error) {
       errorMessage.value = 'Error al conectar al servidor.';
@@ -28,19 +33,14 @@
 </script>
 
 <template>
-    <div>
-      <h1>Iniciar Sesión</h1>
-      <form @submit.prevent="login">
-        <input v-model="userId" placeholder="ID" required />
-        <input type="password" v-model="password" placeholder="Contraseña" required />
-        <button type="submit">Ingresar</button>
-      </form>
-      <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
-    </div>
-    <div>
-      <h2>No tenes cuenta? Regístrate!</h2>
-      <button @click="$emit('go-to-register')" type="button">Registrarse</button>
-    </div>
+  <div>
+    <h1>Iniciar Sesión</h1>
+    <form @submit.prevent="login">
+      <input v-model="userId" placeholder="Ingresar ID"/>
+      <button type="submit">Ingresar</button>
+    </form>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+  </div>
 </template>
   
   
