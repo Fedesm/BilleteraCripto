@@ -3,8 +3,9 @@ import { defineStore } from 'pinia';
 export const useUserStore = defineStore ('user', {
     //Estado inicial
     state: () => ({
-        userId: null,
-        userData: null  //Estado para almacenar Id del usuario
+        userId: localStorage.getItem('userId'),
+        balance: localStorage.getItem('balance'),
+        crytosOwned: JSON.parse(localStorage.getItem('cryptosOwned')) || [],
         }),
 
     //Acciones para modificar el estado
@@ -13,6 +14,16 @@ export const useUserStore = defineStore ('user', {
         setUserId(userId) {
             this.userId = userId;
             localStorage.setItem('userId', userId);  //Para guardar el usuario de forma local
+        },
+
+        setBalance(amount){
+            this.balance = amount;
+            localStorage.setItem('balance', amount);
+        },
+
+        setCryptosOwned(cryptos){
+            this.crytosOwned = cryptos;
+            localStorage.getItem('cryptosOwned', JSON.stringify(cryptos));
         },
     
         //Metodo para limpiar el ID del usuario (logout)
@@ -26,5 +37,7 @@ export const useUserStore = defineStore ('user', {
     getters: {
         //Verificar si hay un usuario logueado
         isLoggedIn: (state) => state.userId !== null
+
+    
     }
 });

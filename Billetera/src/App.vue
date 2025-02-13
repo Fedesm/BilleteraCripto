@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import LoginComponent from './components/LoginComponent.vue'
-//import RegisterComponent from './components/RegisterComponent.vue';
 
 const LogOk = ref(false);
 const currentView = ref('login');
@@ -12,14 +11,6 @@ const handleLoginSuccess = () => {
   LogOk.value = true;
   currentView.value = 'welcome';  
 }
-
-// const goToRegister = () => {
-//   currentView.value = 'register';
-// }
-
-// const goToLogin = () => {
-//   currentView.value = 'login';
-// }
 
 </script>
 
@@ -33,15 +24,11 @@ const handleLoginSuccess = () => {
   </header>
 
   <main>
-   <!-- <LoginComponent 
+   <LoginComponent 
       v-if="currentView === 'login' && !LogOk"
       @login-success="handleLoginSuccess" 
-    />-->
-    <!-- <RegisterComponent
-      v-else-if="currentView === 'register'"
-      @go-to-login="goToLogin" />
-    <TheWelcome v-else-if="LogOk"/> -->
-   <TheWelcome />
+    />
+    <TheWelcome v-if="LogOk"/>
   </main>
 </template>
 

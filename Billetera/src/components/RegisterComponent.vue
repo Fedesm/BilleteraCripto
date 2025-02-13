@@ -14,7 +14,7 @@
     try {
       const newUser = { 
         userId: userId.value.trim(),
-        password: password.value.trim()
+        // password: password.value.trim()
       }
       await registerUser(newUser);
   
@@ -42,7 +42,7 @@
       <h1>Registrar usuario</h1>
       <form @submit.prevent="register">
         <input v-model="userId" placeholder="Ingresa Id" required />
-        <input v-model="password" type="password" placeholder="Contraseña" required />
+        <!-- <input v-model="password" type="password" placeholder="Contraseña" required /> -->
         <button type="submit">Registrar</button>
       </form>
       <p v-if="message" :class = "{'success': isSuccess, 'error': !isSuccess}">{{ message }}</p>

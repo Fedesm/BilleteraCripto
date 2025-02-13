@@ -10,13 +10,10 @@ const selectedCrypto = ref('');
 const selectedAction = ref('');
 const selectedFiat = ref('');
 const cryptosPrices = ref([]);
-//const amount = ref(0);
-//const message = ref('');
 const transactions = ref([]);
 const cryptoHoldings = ref([]);
 const totalMoney = ref(0);
 const userStore = useUserStore();
-//const ErrorMessage = ref('');
 
 const fetchCryptoPrices = async () => {
   cryptosPrices.value = [];

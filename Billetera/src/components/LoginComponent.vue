@@ -5,7 +5,7 @@
   
   const userId = ref('');
   const errorMessage = ref ('');
-  const emit = defineEmits(['login-success', 'go-to-register']);
+  const emit = defineEmits('login-success');
   const userStore = useUserStore();
   
   async function login() {
@@ -17,8 +17,8 @@
 
       const users = await loginUser(userId.value);
   
-      if(user) {
-        userStore.setUserId(user.userId);
+      if(users) {
+        userStore.setUserId(users.userId);
         emit('login-success');
       }
       else {
@@ -41,6 +41,7 @@
     </form>
     <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
   </div>
+
 </template>
   
   
